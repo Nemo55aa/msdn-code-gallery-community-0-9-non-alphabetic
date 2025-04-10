@@ -323,12 +323,12 @@ CSmallApp&nbsp;theApp;&nbsp;
 </strong>今回は、フレーム ウィンドウとして CMDIFrameWnd 派生クラスを使用しましたが、例 6.3 において、代わりに CFrameWnd から派生させれば、より汎用的な実装になります。</p>
 </div>
 <p>これを実行すると、次のように MDI の親ウィンドウにあたるフレーム ウィンドウが表示されます。</p>
-<p><img src="http://i1.code.msdn.s-msft.com/visualc-43c71460/image/file/24212/1/image005.jpg" alt="図 6.5" width="600" height="335"></p>
+<p><img src="./24212-image005.jpg" alt="図 6.5" width="600" height="335"></p>
 <p><strong>図 6.5 フレーム ウィンドウが表示される基本的な実装</strong></p>
 <p>アイコンやタイトル、メニュー バーも、例 6.4 のリソースが反映されます。</p>
 <p>さらに興味深いことに、次に示すように [ファイル] メニューの [アプリケーションの終了] は有効化 (黒色) されていますが、 [表示] メニューの [項目 1] は無効化 (グレー) されています。</p>
-<p><img src="http://i1.code.msdn.s-msft.com/visualc-43c71460/image/file/24197/2/image006.jpg" alt="図6.6 メニュー項目の動的な有効化" width="600" height="92"></p>
-<p><img src="http://i1.code.msdn.s-msft.com/visualc-43c71460/image/file/24216/1/image007.jpg" alt="図6.6 メニュー項目の無効化" width="600" height="92"></p>
+<p><img src="./24197-image006.jpg" alt="図6.6 メニュー項目の動的な有効化" width="600" height="92"></p>
+<p><img src="./24216-image007.jpg" alt="図6.6 メニュー項目の無効化" width="600" height="92"></p>
 <p><strong>図 6.6 メニュー項目の動的な有効化と無効化</strong></p>
 <p>この例では、[アプリケーションの終了] メニューのコマンド ID として、MFC の予約済みである ID_APP_EXIT を使用していました。このコマンド ID には、アプリケーションを終了するための標準実装 CWinApp::OnAppExit メンバー関数が、コマンド ハンドラーとして既にマップされているのです。MFC ライブラリの実行環境は、アプリケーションの実行時に、メニュー項目のコマンド ID にマップされたコマンド ハンドラーの有無を確認し、コマンド ハンドラーが存在する場合には、そのメニュー項目を動的に有効化し、存在しない場合には、動的に無効化するようになっています。そのため、図
  6.6 のような違いが現れました。</p>
@@ -346,7 +346,7 @@ CSmallApp&nbsp;theApp;&nbsp;
 <h2 id="07" style="font-size:120%; margin-top:20px">7. ドキュメント、ビュー、子フレーム ウィンドウの役割</h2>
 <p>MDI の親ウィンドウの実装が済んだので、今度は MDI の子ウィンドウを実装します。ここで、いよいよドキュメント/ビュー アーキテクチャを使用します。</p>
 <p>子ウィンドウを実装するには、データを管理するドキュメント クラスと、そのデータを子ウィンドウのクライアント領域に表示するビュー クラスを実装する必要があります。これらのクラスの相関関係をより正確に表すと、次図のようになります。</p>
-<p><img src="http://i1.code.msdn.s-msft.com/visualc-43c71460/image/file/24198/1/image008.gif" alt="図 6.7" width="600" height="450"></p>
+<p><img src="./24198-image008.gif" alt="図 6.7" width="600" height="450"></p>
 <p><strong>図 6.7 ドキュメント、ビュー、子フレームの関係</strong></p>
 <p>この図の [1]、[2]、および [3] のそれぞれの大きな枠が、1 つ分の子ウィンドウの実装です。それぞれの枠内は、ドキュメント、ビュー、子フレーム ウィンドウの 3 種類のクラスが 1 組の実装として構成されています。各クラスは、それぞれの枠内に記載たれたクラスから継承します。実行時には、子ウィンドウが 1 個表示されるごとに、これら 1 組の 3 種類のクラスのオブジェクトインスタンスが生成されます。</p>
 <p>この図の [1]、[2]、および [3] では、各組の実装が異なっています。その違いは、それぞれのドキュメント クラスが管理するデータの違いです。それぞれ順に、テキスト、イメージ、分析データを管理しています。基本的な考え方としては、管理するデータが異なれば、この 3 種類のクラスの別の組み合わせを用意することになります。</p>
@@ -675,10 +675,10 @@ CSmallApp&nbsp;theApp;&nbsp;
 <li>汎用的なヘッダー --- 例 6.1 stdafx.h </li><li>アプリケーション クラス ---- 例 6.8 SmallApp.h、および SmallApp.cpp </li><li>フレーム ウィンドウ ---- 例 6.3 MainFrm.h および MainFrm.cpp </li><li>リソース ---- 例 6.7 resource.h および SmallApp.rc (例 6.4 の SmallApp.rc を含む) </li><li>アイコン ファイル ---- SmallApp.ico、SmallText.ico (いずれもオプション) </li><li>ドキュメント、ビュー、子フレーム ---- 例 6.6 SmallDoc.h、SmallDoc.cpp、SmallView.h、SmallView.cpp、ChildFrm.h、および ChildFrm.cpp
 </li></ul>
 <p>この状態で実行すると、次図のように子ウィンドウが表示されます。メニューは、子ウィンドウのリソースとして定義した例 6.7 のメニュー バー (正確にいえば、ドキュメント テンプレートのコンストラクター引数へ渡したリソースのメニュー バー) が表示されます。</p>
-<p><img src="http://i1.code.msdn.s-msft.com/visualc-43c71460/image/file/24199/1/image010.gif" alt="図 6.9" width="600" height="359"></p>
+<p><img src="./24199-image010.gif" alt="図 6.9" width="600" height="359"></p>
 <p><strong>図 6.9 完成した MDI アプリケーション</strong></p>
 <p>また、子ウィンドウ内の右上部の閉じるボタン ([&times;] ボタン) をクリックして、子ウィンドウを閉じると、次図のように、メニュー バーはメインのフレーム ウィンドウに使用されたリソースに切替わることが分かります。</p>
-<p><img src="http://i1.code.msdn.s-msft.com/visualc-43c71460/image/file/24214/1/image011.jpg" alt="図 6.10" width="600" height="82"></p>
+<p><img src="./24214-image011.jpg" alt="図 6.10" width="600" height="82"></p>
 <p><strong>図 6.10 メイン フレーム ウィンドウのメニュー バーに切替わる</strong></p>
 <p>確認が済んだら、アプリケーションを終了しておきましょう。</p>
 <p><a href="#top"><img src="http://www.microsoft.com/japan/msdn/nodehomes/graphics/top.gif" border="0" alt="">ページのトップへ</a></p>
